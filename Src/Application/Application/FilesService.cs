@@ -18,9 +18,9 @@ public class FilesService : IFilesServices
         this._filePdfManager = filePdfManager;
     }
 
-    public async Task Add(FileType fileType, string ClientID, int ClientCode, string fileName, byte[] fileContent)
+    public async Task<Guid> Add(FileType fileType, string ClientID, int ClientCode, string fileName, byte[] fileContent)
        => await _filePdfManager.Add( fileType,  ClientID,  ClientCode,  fileName, fileContent);
 
-    public async Task<List<FilePdfManager>> Getall()
-     => await _filePdfManager.Getall();
+    public async Task<FilesModel> GetBystream_idandClientId(string ClientID, Guid stream_id)
+     => await _filePdfManager.GetBystream_idandClientId(ClientID, stream_id);
 }

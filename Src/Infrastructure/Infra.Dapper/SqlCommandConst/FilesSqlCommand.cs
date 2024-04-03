@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -15,15 +16,18 @@ public class FilesSqlCommand
     private const string _tableFileMetadataname = "FileMetadata";
 
     public const string sqlGetCountNew = "SELECT COUNT(*) FROM " + _tablename + " where cast( Created as date)= cast(Getdate() as date)";
-    public const string sqlGetFirst = " SELECT id,firstname + ' ' + lastName as FullName  ,Email +' | ' + PhoneNumber Email_PhoneNumber ,BankAccountNumber " +
-        "FROM " + _tablename + " where cast( Created as date)= cast(Getdate() as date)";
+    public const string sqlGetBystream_idandClientId = @" SELECT top 1 [stream_id]  ,[file_stream] ,[name] ,[file_type]
+                                          ,[cached_file_size]  ,[creation_time]  ,[last_write_time]  ,[last_access_time]
+                                          FROM "+ _tablename + @"   f
+                                          inner join  "+ _tableFileMetadataname + @" fmd on f.[stream_id]=fmd.StreamId
+                                          where stream_id=@stream_id and fmd.ClientId=@ClientId";
 
     public const string sqlGetAll =
        @" SELECT * " + "FROM " + _tablename;
 
 
     public const string sqlINSERT = @"BEGIN TRANSACTION; BEGIN TRY " +
-                  @"declare @newid varchar(100)=newid() 
+                  @"declare @newid varchar(100)=@StreamId
                   declare @path_locator varchar(100)=''
                   SELECT @path_locator = ISNULL('@Path', '/')  + " +
                   @" convert(varchar(20), convert(bigint, substring(convert(binary(16), @newid), 1, 6))) + '.' + " +

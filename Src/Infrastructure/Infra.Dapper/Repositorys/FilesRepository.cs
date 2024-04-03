@@ -46,6 +46,31 @@ public class FilesRepository : IFilesRepository
         }
         return StreamId;
     }
+
+
+    public async Task<FilesModel> GetBystream_idandClientId(string ClientID, Guid stream_id)
+    {
+        var FilesModel = new FilesModel();
+        using (var db = _context.CreateConnection())
+        {
+
+            var dictionary = new Dictionary<string, object>
+                    {
+                         { "@stream_id", stream_id }
+                        ,{ "@ClientID", ClientID }
+
+                    };
+            var parameters = new DynamicParameters(dictionary);
+            string query = FilesSqlCommand.sqlGetBystream_idandClientId;
+            FilesModel = await db.QueryFirstAsync<FilesModel>(query, parameters);
+
+        }
+        return FilesModel;
+    }
+
+
+
+    #region Private
     private async Task AdddirectoryWithDateAsync(FileType fileType, string ClientId, int ClientCode)
     {
         await AddFileTypedirectoryAsync(fileType, ClientCode);
@@ -112,13 +137,6 @@ public class FilesRepository : IFilesRepository
         }
     }
 
-    public async Task<List<FilePdfManager>> Getall()
-    {
-        using (var db = _context.CreateConnection())
-        {
-            return (await db.QueryAsync<FilePdfManager>(FilesSqlCommand.sqlGetAll)).ToList();
-        }
-
-    }
+    #endregion
 
 }

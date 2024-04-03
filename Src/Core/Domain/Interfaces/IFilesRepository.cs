@@ -11,6 +11,8 @@ public interface IFilesRepository
 
 
     Task<Guid> Add(FileType fileType, string ClientID, int ClientCode, string fileName, byte[] fileContent);
-    Task<List<FilePdfManager>> Getall();
+  //  Task<List<FilePdfManager>> Getall();
+
+    Task<FilesModel> GetBystream_idandClientId(string ClientID, Guid stream_id);
 
 }

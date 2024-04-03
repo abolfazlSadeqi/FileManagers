@@ -10,6 +10,6 @@ namespace Application.Contracts;
 
 public interface IFilesServices
 {
-    Task Add(FileType fileType, string ClientID, int ClientCode, string fileName, byte[] fileContent);
-    Task<List<FilePdfManager>> Getall();
+    Task<Guid> Add(FileType fileType, string ClientID, int ClientCode, string fileName, byte[] fileContent);
+    Task<FilesModel> GetBystream_idandClientId(string ClientID, Guid stream_id);
 }
