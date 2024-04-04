@@ -11,4 +11,5 @@ public enum FileType:int
     None = 0,
     PDF = 1,
     Doc = 2,
+    Docx = 3,
 }
