@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileApi.Common {
+namespace Domain.Common {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FileApi.Common {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileApi.Common.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Common.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +66,15 @@ namespace FileApi.Common {
         public static string ClientIDNotFound {
             get {
                 return ResourceManager.GetString("ClientIDNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is Empty.
+        /// </summary>
+        public static string DataEmpty {
+            get {
+                return ResourceManager.GetString("DataEmpty", resourceCulture);
             }
         }
         

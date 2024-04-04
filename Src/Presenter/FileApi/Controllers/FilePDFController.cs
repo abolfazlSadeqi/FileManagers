@@ -1,11 +1,6 @@
 ﻿using Application.Contracts;
 using Domain.Enums;
-using FileApi.Common;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.VisualBasic.FileIO;
-using System.Runtime.Intrinsics.Arm;
 
 namespace FileApi.Controllers;
 
@@ -15,17 +10,12 @@ namespace FileApi.Controllers;
 public class FilePDFController : BaseControllerBase
 {
     public readonly IFilesServices _filePdfManagerservice;
-    private readonly IOptions<List<ListClients>> _ListClients;
-    private readonly IOptions<List<ListFileSize>> _ListFileSize;
 
     public FilePDFController(
-          IFilesServices filePdfManagerservice
-        , IOptions<List<ListClients>> ListClients
-        , IOptions<List<ListFileSize>> listFileSize) : base(ListClients, listFileSize)
+          IFilesServices filePdfManagerservice) : base()
     {
         _filePdfManagerservice = filePdfManagerservice;
-        _ListClients = ListClients;
-        _ListFileSize = listFileSize;
+      
     }
 
 
@@ -34,10 +24,8 @@ public class FilePDFController : BaseControllerBase
     [HttpPost]
     public async Task<IActionResult> UploadFiles(string ClientID, string fileName, byte[] fileContent)
     {
-        //to do :find ClientCode of DB
-        int ClientCode = GetClientCode(ClientID);
-        CheckSize(FileType.PDF, fileContent);
-        return Ok(await _filePdfManagerservice.Add(FileType.PDF, ClientID, ClientCode, fileName, fileContent));
+       
+        return Ok(await _filePdfManagerservice.Add(FileType.PDF, ClientID, fileName, fileContent));
       
     }
 

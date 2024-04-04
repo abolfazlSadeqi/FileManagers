@@ -27,7 +27,7 @@ public class FilesRepository : IFilesRepository
 
         string _Path = FilesPath.CreatePathWithfileTypeClientCodeDate(fileType, ClientCode);
 
-        fileName = fileName + "." + fileType.ToString();
+        fileName = fileName + StreamId + "." + fileType.ToString();
         using (var db = _context.CreateConnection())
         {
 

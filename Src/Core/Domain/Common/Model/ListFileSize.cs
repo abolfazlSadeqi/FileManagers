@@ -1,6 +1,6 @@
 ﻿using Domain.Enums;
 
-namespace FileApi.Common;
+namespace Domain.Common.Model;
 
 public class ListFileSize
 {

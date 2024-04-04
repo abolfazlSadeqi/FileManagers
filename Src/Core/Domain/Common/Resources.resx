@@ -120,6 +120,9 @@
   <data name="ClientIDNotFound" xml:space="preserve">
     <value>Client Not Found</value>
   </data>
+  <data name="DataEmpty" xml:space="preserve">
+    <value>{0} is Empty</value>
+  </data>
   <data name="FileIsLarge" xml:space="preserve">
     <value>FileIsLarge</value>
   </data>
